@@ -28,6 +28,7 @@ dependencies:
 - time
 - directory
 - optparse-applicative
+- vector
 
 library:
   source-dirs: src

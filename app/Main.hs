@@ -67,10 +67,23 @@ parser = info (helper <*> optionsParser) optionsDesc
 main :: IO ()
 main = do
   opts <- execParser parser
-  let resDir = opResDir opts
+  let inFile  = opInputFile opts
+      resDir  = opResDir opts
+      exoMode = opMode opts
 
-  --
-  -- do importing
+  case exoMode of
+    False -> do
+      case inFile of
+        Nothing -> do
+          putStrLn $ "ERROR: no input files supplied"
+          return $ ()
+        Just file -> do
+          --
+          -- do importing
+          -- 1. parse csv inti
 
-
-  return $ ()
+          readData file
+          return $ ()
+    True  -> do
+      putStrLn $ "Exporting not yet implemented"
+      return $ ()
