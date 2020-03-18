@@ -1,0 +1,72 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 9b14b7314ed8034cb198241d8805e2692b6164691c68e05f0118c502c82f10d5
+
+name:           android-translation-helper
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/sigrlami/android-translation-helper#readme>
+homepage:       https://github.com/sigrlami/android-translation-helper#readme
+bug-reports:    https://github.com/sigrlami/android-translation-helper/issues
+author:         Sergey Bushnyak
+maintainer:     sergey.bushnyak@sigrlami.eu
+copyright:      2020, Sergey Bushnyak
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/sigrlami/android-translation-helper
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_android_translation_helper
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , cassava
+    , text
+    , xeno
+  default-language: Haskell2010
+
+executable ath
+  main-is: Main.hs
+  other-modules:
+      Types
+      Paths_android_translation_helper
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      android-translation-helper
+    , base >=4.7 && <5
+    , cassava
+    , text
+    , xeno
+  default-language: Haskell2010
+
+test-suite ath-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_android_translation_helper
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      android-translation-helper
+    , base >=4.7 && <5
+    , cassava
+    , text
+    , xeno
+  default-language: Haskell2010
