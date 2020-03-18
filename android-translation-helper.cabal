@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9b14b7314ed8034cb198241d8805e2692b6164691c68e05f0118c502c82f10d5
+-- hash: 2a080e58d8b711dd5373acf7bda885d755ae9ed8e2193cc6e7458ec414306c6f
 
 name:           android-translation-helper
 version:        0.1.0.0
@@ -34,8 +34,12 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , cassava
+    , directory
+    , optparse-applicative
     , text
+    , time
     , xeno
   default-language: Haskell2010
 
@@ -50,8 +54,12 @@ executable ath
   build-depends:
       android-translation-helper
     , base >=4.7 && <5
+    , bytestring
     , cassava
+    , directory
+    , optparse-applicative
     , text
+    , time
     , xeno
   default-language: Haskell2010
 
@@ -66,7 +74,11 @@ test-suite ath-test
   build-depends:
       android-translation-helper
     , base >=4.7 && <5
+    , bytestring
     , cassava
+    , directory
+    , optparse-applicative
     , text
+    , time
     , xeno
   default-language: Haskell2010
