@@ -90,15 +90,48 @@ main = do
               return $ ()
             Right trls -> do
               -- 2. convert csv record to xml file
-              let doc = XML.document "resources" $ do
+              let docEn = XML.document "resources" $ do
+                            forM_ trls $ \tr-> do
+                              let k = key tr
+                                  v = langEn tr
+                                  --a = Map.fromList $
+                              XML.elementA "string" [(Name "name" Nothing Nothing, k)] $ XML.content v
+
+              let docDa = XML.document "resources" $ do
+                            forM_ trls $ \tr-> do
+                              let k = key tr
+                                  v = langDa tr
+                                  --a = Map.fromList $
+                              XML.elementA "string" [(Name "name" Nothing Nothing, k)] $ XML.content v
+
+              let docNo = XML.document "resources" $ do
+                            forM_ trls $ \tr-> do
+                              let k = key tr
+                                  v = langNo tr
+                                  --a = Map.fromList $
+                              XML.elementA "string" [(Name "name" Nothing Nothing, k)] $ XML.content v
+
+              let docSe = XML.document "resources" $ do
                             forM_ trls $ \tr-> do
                               let k = key tr
                                   v = langSe tr
                                   --a = Map.fromList $
                               XML.elementA "string" [(Name "name" Nothing Nothing, k)] $ XML.content v
 
+              XML.writeFile
+                def "/home/sigrlami9/work/projects-hs/android-translation-helper/test/out/values/strings.xml" docEn
 
-              XML.writeFile def "/home/sigrlami9/work/projects-hs/android-translation-helper/test/out.xml" doc
+              XML.writeFile
+                def "/home/sigrlami9/work/projects-hs/android-translation-helper/test/out/values-da/strings.xml" docDa
+
+              XML.writeFile
+                def "/home/sigrlami9/work/projects-hs/android-translation-helper/test/out/values-no/strings.xml" docNo
+
+              XML.writeFile
+                def "/home/sigrlami9/work/projects-hs/android-translation-helper/test/out/values-sv/strings.xml" docSe
+
+
+
               return $ ()
     True  -> do
       putStrLn $ "Exporting not yet implemented"
