@@ -39,7 +39,7 @@ instance FromNamedRecord Translation where
       <*> m Csv..: "en"
       <*> m Csv..: "da"
       <*> m Csv..: "no"
-      <*> m Csv..: "se"
+      <*> m Csv..: "sv"
 
 instance ToNamedRecord Translation where
   toNamedRecord (Translation {..}) =
@@ -48,12 +48,12 @@ instance ToNamedRecord Translation where
       , "en"        Csv..= langEn
       , "da"        Csv..= langDa
       , "no"        Csv..= langNo
-      , "se"        Csv..= langSe
+      , "sv"        Csv..= langSe
       ]
 
 --------------------------------------------------------------------------------
 
-readData :: String -> IO (Either String [Translation]
+readData :: String -> IO (Either String [Translation])
 readData fname =
   do
     csvData <- BL.readFile fname
@@ -70,7 +70,7 @@ readData fname =
           Right vals ->
             do
               -- putStrLn $ show $ vals
-              return $ Right vals
+              return $ Right (V.toList vals)
 
 
 decodeTranslations :: BL.ByteString -> Either String (V.Vector Translation)

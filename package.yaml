@@ -29,6 +29,11 @@ dependencies:
 - directory
 - optparse-applicative
 - vector
+- xml-conduit
+- xml-conduit-writer
+- containers
+- data-default
+- data-default-class
 
 library:
   source-dirs: src

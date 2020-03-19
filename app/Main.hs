@@ -5,11 +5,12 @@ module Main where
 import           Control.Applicative
 import           Control.Concurrent
 import qualified Control.Exception      as Exception
-import           Control.Monad          (filterM, forever)
+import           Control.Monad          (filterM, forM, forM_, forever)
 import           Control.Monad.IO.Class
 import qualified Data.ByteString        as BS
 import qualified Data.ByteString.Char8  as BSC
 import qualified Data.ByteString.Lazy   as BSL
+import           Data.Map               as Map
 import           Data.Maybe
 import           Data.Monoid
 import qualified Data.Text              as T
@@ -22,6 +23,8 @@ import           System.Environment
 import           System.IO
 import qualified System.IO              as IO
 import           Text.Read
+import           Text.XML               as XML
+import           Text.XML.Writer        as XML
 
 import           Lib
 import           Types
@@ -80,10 +83,23 @@ main = do
         Just file -> do
           --
           -- do importing
-          -- 1. parse csv inti
+          -- 1. parse csv file with translations
+          translationsE <- readData file
+          case translationsE of
+            Left err ->
+              return $ ()
+            Right trls -> do
+              -- 2. convert csv record to xml file
+              let doc = XML.document "resources" $ do
+                            forM_ trls $ \tr-> do
+                              let k = key tr
+                                  v = langSe tr
+                                  --a = Map.fromList $
+                              XML.elementA "string" [(Name "name" Nothing Nothing, k)] $ XML.content v
 
-          readData file
-          return $ ()
+
+              XML.writeFile def "/home/sigrlami9/work/projects-hs/android-translation-helper/test/out.xml" doc
+              return $ ()
     True  -> do
       putStrLn $ "Exporting not yet implemented"
       return $ ()
